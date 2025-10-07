@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz da Tabuada</title>
+  <link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#3b82f6">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js')
+      .then(() => console.log("✅ Service Worker registrado!"))
+      .catch(err => console.log("Falha no Service Worker:", err));
+  }
+</script>
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #f0f4f8, #e2e8f0);
+      margin-top: 60px;
+    }
+    .container {
+      background: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #e2e8f0;
+    }
+    button:hover {
+      background: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🧮 Quiz da Tabuada (1 a 10)</h1>
+    <h3>Pergunta {{ num_pergunta }} de 10</h3>
+
+    {% if mensagem %}
+      <p><strong>{{ mensagem }}</strong></p>
+    {% endif %}
+
+    <form action="/responder" method="post">
+      <h2>{{ pergunta.num1 }} ? {{ pergunta.num2 }} = {{ pergunta.resultado }}</h2>
+
+      {% for opcao in pergunta.opcoes %}
+        <button type="submit" name="operador" value="{{ opcao }}">{{ opcao }}</button>
+      {% endfor %}
+    </form>
+
+    <p>✅ Acertos: {{ acertos }} | ❌ Erros: {{ erros }}</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Fim do Jogo</title>
+ <link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#3b82f6">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js')
+      .then(() => console.log("✅ Service Worker registrado!"))
+      .catch(err => console.log("Falha no Service Worker:", err));
+  }
+</script>
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      margin-top: 80px;
+    }
+    .container {
+      background: white;
+      display: inline-block;
+      padding: 40px 60px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #1e293b;
+    }
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .acertos {
+      color: green;
+      font-weight: bold;
+    }
+    .erros {
+      color: red;
+      font-weight: bold;
+    }
+    a {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 24px;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    a:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏁 Fim do Jogo!</h1>
+    <p class="acertos">✅ Acertos: {{ acertos }}</p>
+    <p class="erros">❌ Erros: {{ erros }}</p>
+    <a href="/reiniciar">🔄 Jogar Novamente</a>
+  </div>
+</body>
+</html>
